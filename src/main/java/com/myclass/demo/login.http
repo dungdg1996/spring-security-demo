@@ -1,0 +1,12 @@
+###
+POST http://localhost:8080/api/auth
+Content-Type: application/json
+
+{
+  "email": "dung",
+  "password": "123"
+}
+
+###
+
+

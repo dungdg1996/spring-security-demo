@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="/layout/default">
+<head>
+	<title>Insert title here</title>
+</head>
+<body>
+	<section id="admin-content" class="p-3" layout:fragment="noidung">
+		<h3 class="mb-3">Danh sách quyền</h3>
+		<div class="row">
+			<div class="col-md-8">
+				<a th:href="@{/role/add}" class="btn btn-primary">Thêm mới</a>
+			</div>
+			<div class="col-md-4">
+				<form th:action="@{/role/search}" method="get">
+					<div class="input-group">
+					<input type="text" name="keyword" class="form-control" placeholder="Tìm kiếm...">
+					<button class="input-group-append">
+						<span class="input-group-text" id="basic-addon2">
+							<i class="fa fa-search"></i>
+						</span>
+					</button>
+				</div>
+				</form>
+			</div>
+		</div>
+		<table class="table table-bordered table-hover mt-3">
+			<thead>
+				<tr>
+					<th>STT</th>
+					<th>Tên Quyền</th>
+					<th>Mô Tả</th>
+					<th>#</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${roles.empty}">
+					<td colspan="4">Không có bản ghi nào được tìm thấy!</td>
+				</tr>
+				<tr th:each="item : ${roles}">
+					<td th:text="${item.id}">1</td>
+					<td th:text="${item.name}">ROLE_ADMIN</td>
+					<td th:text="${item.description}">Quản trị hệ thống</td>
+					<td>
+						<a th:href="@{/role/edit(id=${item.id})}" class="btn btn-sm btn-info">
+							<i class="fa fa-pencil-square-o"></i>
+						</a> 
+						<a th:href="@{/role/delete/{id}(id=${item.id})}" class="btn btn-sm btn-danger"> 
+							<i class="fa fa-trash-o"></i>
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+</body>
+</html>
